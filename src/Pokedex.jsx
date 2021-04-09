@@ -10,6 +10,7 @@ export default function Pokedex() {
     const [prevPageUrl, setPrevPageUrl] = useState("");
     const [nextPageUrl, setNextPageUrl] = useState("");
     const [loading, setLoading] = useState(true);
+    const [showPokemon, setShowPokemon] = useState(false);
     
     const limit = 60;
 
@@ -36,6 +37,11 @@ export default function Pokedex() {
         setCurrentPageUrl(prevPageUrl);
         setOffset(offset - limit);
     }
+
+    function showStats(pokemonName) {
+        setShowPokemon(true);
+        console.log(pokemonName);
+    }
     
     if (loading) return "Loading..."
 
@@ -43,7 +49,8 @@ export default function Pokedex() {
         <>
             <PokemonList 
                 pokemons={pokemons}
-                offset={offset} 
+                offset={offset}
+                showStats={showStats}
             />
             <Pagination 
                 gotoNextPage={nextPageUrl ? gotoNextPage : null}
